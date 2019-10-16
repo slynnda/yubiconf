@@ -55,3 +55,17 @@ RUN sudo --user=${RUNTIME_USER} yay -Sy \
     test -f $(command -v ykman) && \
     $(command -v ykman) --version && \
     echo "Successfully installed yubikey-manager $(ykman --version) to $(command -v ykman)"
+
+RUN sudo --user=${RUNTIME_USER} yay -Sy \
+                                   --gitclone \
+                                   --noconfirm yubico-pam && \
+    test -f $(command -v ykpamcfg) && \
+    $(command -v ykpamcfg) -V && \
+    echo "Successfully installed ykpamcfg $(ykpamcfg -V) to $(command -v ykpamcfg)"
+
+RUN sudo --user=${RUNTIME_USER} yay -Sy \
+                                    --gitclone \
+                                    --noconfirm yubikey-personalization && \
+    test -f $(command -v ykpersonalize) && \
+    $(command -v ykpersonalize) -V && \
+    echo "Successfully installed ykpersonalize $(ykpersonalize -V) to $(command -v ykpersonalize)"
